@@ -1,10 +1,19 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from gtts import gTTS
 import uuid
 import os
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Untuk development, boleh semua origin
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 OUTPUT_DIR = "output_mp3"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
